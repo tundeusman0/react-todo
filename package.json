@@ -1,0 +1,24 @@
+{
+  "name": "react-todo",
+  "version": "1.0.0",
+  "description": "a react todo app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "dev:server": "env-cmd nodemon server"
+  },
+  "author": "tunde usman",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.11",
+    "validator": "^11.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.2",
+    "env-cmd": "^9.0.3",
+    "nodemon": "^1.19.1"
+  }
+}
