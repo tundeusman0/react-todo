@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server",
-    "dev:server": "env-cmd nodemon src/server"
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "dev:server": "env-cmd nodemon src/server",
+    "dev": "concurrently \"npm run client\" \"npm run dev:server\""
   },
   "author": "tunde usman",
   "license": "ISC",
