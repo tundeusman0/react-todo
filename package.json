@@ -4,8 +4,8 @@
   "description": "a react todo app",
   "main": "index.js",
   "scripts": {
-    "start": "node server",
-    "dev:server": "env-cmd nodemon server"
+    "start": "node src/server",
+    "dev:server": "env-cmd nodemon src/server"
   },
   "author": "tunde usman",
   "license": "ISC",
