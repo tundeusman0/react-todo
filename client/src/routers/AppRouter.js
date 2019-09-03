@@ -1,19 +1,17 @@
-import React from 'react';
-import '../styles/App.scss';
-import '../styles/form.css';
-import DashBoard from './DashBoard';
-import Register from './Register';
-import Login from './Login';
-import AddTodos from './AddTodos';
-import EditTodos from './EditTodos';
-import Todos from './TodosForm';
-import NoMatch from './NoMatch';
+import React, { Component } from 'react';
 import { Switch, Route, Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import DashBoard from '../component/DashBoard';
+import Register from '../component/Register';
+import Login from '../component/Login';
+import AddTodos from '../component/AddTodos';
+import EditTodos from '../component/EditTodos';
+import Todos from '../component/TodosForm';
+import NoMatch from '../component/NoMatch';
 
 const history = createBrowserHistory();
 
-export class App extends React.Component {
+export class AppRouter extends Component {
   render() {
     return (
       <Router history={history}>
@@ -33,4 +31,4 @@ export class App extends React.Component {
   }
 }
 
-export default App;
+export default AppRouter;
