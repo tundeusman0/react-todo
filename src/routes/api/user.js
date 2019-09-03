@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
   }
   const user = await User.findOne({ email });
   if (user) {
-    return res.status(406).json({ msg: 'User already exist' });
+    return res.status(409).json({ msg: 'User already exist' });
   }
   try {
     const user = new User({ name, email, password });
@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// @route auth/user
+// @route auth/user/login
 // @desc login profile
 // @access public
 router.post('/login', async (req, res) => {

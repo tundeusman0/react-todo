@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class Form extends Component {
+class Form extends Component {
   state = {
     name: '',
     email: '',
@@ -8,12 +9,32 @@ export default class Form extends Component {
     password2: '',
     msg: null
   };
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    if (error !== prevProps.error) {
+      if (error.id === 'LOGIN_FAIL' || error.id === 'REGISTER_FAIL') {
+        this.setState({ msg: error.msg });
+      } else {
+        this.setState({ msg: null });
+      }
+    }
+  }
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   onSubmit = e => {
-      e.preventDefault();
-      console.log("submitted")
+    e.preventDefault();
+    const { name, email, password, password2 } = this.state;
+    const register = { name, email, password };
+    const login = { email, password };
+    if (this.props.formName === 'Register') {
+      if (password !== password2) {
+        return this.setState({ msg: 'Password must tally' });
+      } else {
+        return this.props.submitForm(register);
+      }
+    }
+    this.props.submitForm(login);
   };
   render() {
     return (
@@ -25,6 +46,7 @@ export default class Form extends Component {
               <div className="row clearfix">
                 <div className="">
                   <form onSubmit={this.onSubmit}>
+                    {this.state.msg && <h3>{this.state.msg}</h3>}
                     {this.props.formName === 'Register' && (
                       <div className="input_field">
                         <span>
@@ -98,3 +120,8 @@ export default class Form extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  error: state.authError
+});
+export default connect(mapStateToProps)(Form);
