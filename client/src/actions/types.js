@@ -1,6 +1,7 @@
 export const User_Loaded = 'USER_LOADED';
 export const Add_User = 'ADD_USER';
 export const Get_User = 'GET_USER';
+export const User_Loading = 'USER_LOADING';
 export const Update_User = 'UPDATE_USER';
 export const Delete_Account = 'DELETE_ACCOUNT';
 export const Login_User = 'LOGIN_USER';

@@ -5,21 +5,29 @@ import {
   Login_User,
   Logout_User,
   User_Log_Fail,
-  User_Reg_Fail
+  User_Reg_Fail,
+  User_Loading
 } from '../actions/types';
 
 const inistialState = {
   token: Cookie.get('react-todo token'),
   isAthenticated: null,
+  isLoading: false,
   user: null
 };
 
 export default (state = inistialState, action) => {
   switch (action.type) {
+    case User_Loading:
+      return {
+        ...state,
+        isLoading: true
+      };
     case Get_User:
       return {
         ...state,
         isAthenticated: true,
+        isLoading: false,
         user: action.payload
       };
     case Login_User:
@@ -29,6 +37,7 @@ export default (state = inistialState, action) => {
       return {
         ...state,
         isAthenticated: true,
+        isLoading: false,
         user: action.payload
       };
     case User_Reg_Fail:
@@ -38,6 +47,7 @@ export default (state = inistialState, action) => {
       return {
         ...state,
         isAthenticated: false,
+        isLoading: false,
         user: null
       };
     default:

@@ -8,10 +8,16 @@ import {
   Get_User,
   User_Log_Fail,
   User_Reg_Fail,
-  User_Auth_Success
+  User_Auth_Success,
+  User_Loading
 } from './types';
 
+export const setLoadUser = () => ({
+  type: User_Loading
+});
+
 export const getUser = () => async (dispatch, getState) => {
+  dispatch(setLoadUser());
   try {
     const res = await axios.get('/api/user', tokenConfig(getState));
     if (!res) {
