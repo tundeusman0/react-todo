@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import Form from './Form';
 import { addUser } from '../actions/auth';
 
-const Register = ({ addUser }) => (
+const Register = ({ addUser, history }) => (
   <div>
     <Form
       formName="Register"
-      submitForm={user => {
-        addUser(user);
-      }}
+      history={history}
+      submitForm={user => addUser(user)}
     />
   </div>
 );

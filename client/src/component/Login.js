@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Form from './Form';
-import Todo from './TodosForm';
 import { loginUser } from '../actions/auth';
 
-const Login = ({ loginUser }) => {
+const Login = ({ loginUser, history }) => {
   return (
     <div>
-      <Form formName="Login" submitForm={user => loginUser(user)} />
-      <Todo />
+      <Form
+        formName="Login"
+        history={history}
+        submitForm={user => loginUser(user)}
+      />
     </div>
   );
 };

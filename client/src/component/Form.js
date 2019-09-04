@@ -16,6 +16,7 @@ class Form extends Component {
         this.setState({ msg: error.msg });
       } else {
         this.setState({ msg: null });
+        this.props.history.push('/dashboard');
       }
     }
   }
@@ -29,9 +30,9 @@ class Form extends Component {
     const login = { email, password };
     if (this.props.formName === 'Register') {
       if (password !== password2) {
-        return this.setState({ msg: 'Password must tally' });
+        this.setState({ msg: 'Password must tally' });
       } else {
-        return this.props.submitForm(register);
+        this.props.submitForm(register);
       }
     }
     this.props.submitForm(login);
