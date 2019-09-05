@@ -35,7 +35,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route auth/todo
+// @route api/todo
 // @desc edit a todo
 // @access private
 router.patch('/:id', auth, async (req, res) => {
@@ -59,7 +59,7 @@ router.patch('/:id', auth, async (req, res) => {
   }
 });
 
-// @route auth/todo
+// @route api/todo
 // @desc delete a todo
 // @access private
 router.delete('/:id', auth, async (req, res) => {

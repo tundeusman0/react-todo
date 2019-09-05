@@ -31,7 +31,7 @@ export class Todo extends React.Component {
               this.props.todos.todos.map(
                 ({ _id: id, description, createdAt, completed }) => (
                   <li key={id}>
-                    <Link to={`/todo-edit/${id}`}>{description}</Link>
+                    <Link to={`/edit-todo/${id}`}>{description}</Link>
                     <p>completed status: {JSON.stringify(completed)}</p>
                     <p>{createdAt}</p>
                     <button onClick={() => this.props.deleteTodo(id)}>

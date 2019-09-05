@@ -57,19 +57,27 @@ export const addTodo = (payload = {}) => async (dispatch, getState) => {
 };
 
 export const editTodo = payload => async (dispatch, getState) => {
-  //   try {
-  //     const res = await axios.patch(
-  //       `/api/todo/${payload.id}`,
-  //       tokenConfig(getState),
-  //       payload
-  //     );
-  //     dispatch({ type: Edit_Todo, payload });
-  //     console.log(res.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //     console.log(error.message);
-  //     dispatch({ type: Add_Todo_Fail });
-  //   }
+  try {
+    await axios.patch(
+      `/api/todo/${payload.id}`,
+      payload.todo,
+      tokenConfig(getState)
+    );
+      dispatch({ type: Edit_Todo, payload });
+      dispatch({ type: Todo_Success });
+  } catch (error) {
+    let msg = '',
+      status = '';
+    if (error.message === 'Request failed with status code 406') {
+      msg = 'Fill all Fields';
+      status = '406';
+    } else {
+      msg = `Unable to Post Todo`;
+      status = '400';
+    }
+    dispatch({ type: Add_Todo_Fail });
+    dispatch(returnTodoError({ status, msg, id: 'TODO_EDIT_FAIL' }));
+  }
 };
 
 export const deleteTodo = id => async (dispatch, getState) => {

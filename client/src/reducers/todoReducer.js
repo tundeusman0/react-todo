@@ -21,23 +21,28 @@ export default (state = inistialState, action) => {
         todos: [action.payload, ...state.todos]
       };
     case Edit_Todo:
-      return state.map(todo => {
-        if (todo.id === action.payload.id) {
-          return {
-            ...todo,
-            ...action.payload.updates
-          };
-        } else {
-          return todo;
-        }
-      });
+      return {
+        ...state,
+        todos: state.todos.map(todo => {
+          if (todo.id === action.payload.id) {
+            return {
+              ...todo,
+              ...action.payload.todo
+            };
+          } else {
+            return todo;
+          }
+        })
+      };
     case Delete_Todo:
       return {
         ...state,
         todos: state.todos.filter(todo => todo._id !== action.id)
       };
     case Add_Todo_Fail:
-      return [];
+      return {
+        ...state
+      };
     default:
       return state;
   }

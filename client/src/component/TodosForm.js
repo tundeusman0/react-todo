@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 export class TodosForm extends Component {
   state = {
-    description: '',
-    completed: '',
+    description: this.props.todo ? this.props.todo.description : '',
+    completed: this.props.todo ? this.props.todo.completed : '',
     msg: null
   };
   componentDidUpdate(prevProps) {
     const { error } = this.props;
     if (error !== prevProps.error) {
-      if (error.id === 'TODO_FAIL') {
+      if (error.id === 'TODO_FAIL' || error.id === "TODO_EDIT_FAIL") {
         this.setState({ msg: error.msg });
       } else {
         this.setState({ msg: null });
