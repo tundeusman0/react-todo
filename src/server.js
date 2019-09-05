@@ -1,11 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 require('./db/mongoose');
 const userRouter = require('./routes/api/user');
 const adminRouter = require('./routes/api/admin');
 const todoRouter = require('./routes/api/todo');
 
 const app = express();
-
+// enable cors
+app.use(cors());
 // enable json
 app.use(express.json());
 
