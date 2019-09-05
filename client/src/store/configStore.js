@@ -3,6 +3,8 @@ import thunk from 'redux-thunk';
 
 import auth from '../reducers/auth';
 import authError from '../reducers/authError';
+import todos from '../reducers/todoReducer';
+import todoError from '../reducers/todoError';
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // create store
@@ -10,7 +12,9 @@ export default () => {
   const store = createStore(
     combineReducers({
       auth,
-      authError
+      authError,
+      todos,
+      todoError
     }),
     composeEnhancer(applyMiddleware(thunk))
   );

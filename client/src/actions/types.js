@@ -12,6 +12,7 @@ export const Edit_Todo = 'EDIT_TODO';
 export const Delete_Todo = 'DELETE_TODO';
 export const Add_Todo_Fail = 'ADD_TODO_FAIL';
 export const Get_Todo_Fail = 'GET_TODO_FAIL';
+export const Todo_Success = 'TODO_SUCCESS';
 export const User_Auth_Success = 'USER_AUTH_SUCCESS';
 export const User_Auth_Fail = 'USER_AUTHENTICATION_FAIL';
 export const User_Reg_Fail = 'USER_REGISTERATION_FAIL';

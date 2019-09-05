@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class TodosForm extends Component {
+export class TodosForm extends Component {
   state = {
     description: '',
     completed: '',
     msg: null
   };
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    if (error !== prevProps.error) {
+      if (error.id === 'TODO_FAIL') {
+        this.setState({ msg: error.msg });
+      } else {
+        this.setState({ msg: null });
+        this.props.history.push('/dashboard');
+      }
+    }
+  }
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   onSubmit = e => {
     e.preventDefault();
+    const { description, completed } = this.state;
+    const todo = { description, completed };
+    console.log(todo);
+    this.props.submitForm(todo);
     console.log('submitted');
   };
   render() {
@@ -20,6 +36,7 @@ export default class TodosForm extends Component {
           <div className="form_container">
             <div className="title_container">
               <h2>{this.props.formName}</h2>
+              {this.state.msg && this.state.msg}
               <div className="row clearfix">
                 <div className="">
                   <form onSubmit={this.onSubmit}>
@@ -69,3 +86,7 @@ export default class TodosForm extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  error: state.todoError
+});
+export default connect(mapStateToProps)(TodosForm);

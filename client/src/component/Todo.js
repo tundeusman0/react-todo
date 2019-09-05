@@ -1,17 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const Todo = props => (
-  <div>
-    <ul>
-      <li>one</li>
-      <li>two</li>
-      <li>three</li>
-      <li>four</li>
-    </ul>
-  </div>
-);
-
-Todo.propTypes = {};
-
+export class Todo extends React.Component {
+  render() {
+    return (
+      <div>
+        <Link to={`/todo-edit/:id`}>Todo 1</Link>
+        <Link to={`/todo-edit/:id`}>Todo 1</Link>
+      </div>
+    );
+  }
+}
 export default Todo;

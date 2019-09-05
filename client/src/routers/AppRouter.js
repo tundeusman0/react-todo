@@ -40,7 +40,7 @@ export class AppRouter extends Component {
                 <PublicRoute exact path="/" component={HomePage} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/add-todo" component={AddTodos} />
+                <PrivateRoute exact path="/add-todo" component={AddTodos} />
                 <PrivateRoute exact path="/dashboard" component={DashBoard} />
                 <Route exact path="/edit-todo" component={EditTodos} />
                 <Route exact path="/Todos" component={Todos} />

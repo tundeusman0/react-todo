@@ -4,12 +4,12 @@ const Todo = require('../../modals/todos');
 
 const router = express.Router();
 
-// @route auth/todo
+// @route api/todo
 // @desc add a todo
 // @access private
 router.post('/', auth, async (req, res) => {
   const { completed, description } = req.body;
-  if (!completed || !description) {
+  if (typeof completed !== 'boolean' || !description) {
     return res.status(406).json({ msg: 'fill all fields' });
   }
   try {
