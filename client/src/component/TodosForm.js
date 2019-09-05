@@ -25,9 +25,7 @@ export class TodosForm extends Component {
     e.preventDefault();
     const { description, completed } = this.state;
     const todo = { description, completed };
-    console.log(todo);
     this.props.submitForm(todo);
-    console.log('submitted');
   };
   render() {
     return (

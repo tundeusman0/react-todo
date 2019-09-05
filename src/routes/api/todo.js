@@ -21,19 +21,15 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-// @route auth/todo
+// @route api/todo
 // @desc get all todo
 // @access private
 router.get('/', auth, async (req, res) => {
   try {
-    const todos = await Todo.find({ createdBy: req.user.id });
-    if (!todos) {
-      return res.status(405).json({ msg: 'no todos' });
-    }
-    if (todos.length === 0) {
-      return res.status(406).json({ msg: 'You have no Todo' });
-    }
-    res.status(200).json({ todos });
+    const todos = await Todo.find({ createdBy: req.user.id }).sort({
+      createdAt: -1
+    });
+    res.status(200).json(todos);
   } catch (error) {
     res.status(400).json({ msg: 'no todos' });
   }

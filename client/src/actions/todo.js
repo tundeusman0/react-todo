@@ -16,37 +16,33 @@ export const returnTodoError = payload => ({
 });
 
 export const getTodo = () => async (dispatch, getState) => {
-  //   try {
-  //     const res = await axios.get('/api/todo', tokenConfig(getState));
-  //     console.log(res.data);
-  //     dispatch({ type: Get_Todo, payload: res.data });
-  //     dispatch({ type: Todo_Success });
-  //   } catch (error) {
-  //     let msg = '',
-  //       status = '';
-  //     if (error.message === 'Request failed with status code 406') {
-  //       msg = 'Fill all Fields';
-  //       status = '406';
-  //     } else {
-  //       msg = `Unable to Post Todo`;
-  //       status = '400';
-  //     }
-  //     dispatch({ type: Get_Todo_Fail }, { status, msg });
-  //   }
+  try {
+    const res = await axios.get('/api/todo', tokenConfig(getState));
+    dispatch({ type: Get_Todo, payload: res.data });
+    dispatch({ type: Todo_Success });
+  } catch (error) {
+    let msg = '',
+      status = '';
+    if (error.message === 'Request failed with status code 400') {
+      msg = 'Unable to Get Todo';
+      status = '400';
+    } else {
+      msg = `Unable to Get Todo`;
+      status = '500';
+    }
+    dispatch(returnTodoError({ status, msg }));
+  }
 };
 
 export const addTodo = (payload = {}) => async (dispatch, getState) => {
-  let { completed } = payload;
-  completed = JSON.parse(completed);
-  const body = { ...payload, completed };
   try {
+    let { completed } = payload;
+    completed = JSON.parse(completed);
+    const body = { ...payload, completed };
     const res = await axios.post('/api/todo', body, tokenConfig(getState));
-    dispatch({ type: Add_Todo, payload: res.data });
+    dispatch({ type: Add_Todo, payload: res.data.todo });
     dispatch({ type: Todo_Success });
-    console.log(res.data);
   } catch (error) {
-    console.log(error.message);
-    console.log(error);
     let msg = '',
       status = '';
     if (error.message === 'Request failed with status code 406') {
@@ -76,13 +72,10 @@ export const editTodo = payload => async (dispatch, getState) => {
   //   }
 };
 
-export const deleteTodo = payload => async (dispatch, getState) => {
+export const deleteTodo = id => async (dispatch, getState) => {
   //   try {
-  //     const res = await axios.delete(
-  //       `/api/todo/${payload.id}`,
-  //       tokenConfig(getState)
-  //     );
-  //     dispatch({ type: Delete_Todo, payload });
+  //     const res = await axios.delete(`/api/todo/${id}`, tokenConfig(getState));
+  //     dispatch({ type: Delete_Todo, id });
   //     console.log(res.data);
   //   } catch (error) {
   //     console.log(error);

@@ -6,6 +6,7 @@ import './styles/App.scss';
 import './styles/form.css';
 import AppRouter from './routers/AppRouter';
 import { getUser } from './actions/auth';
+import { getTodo } from './actions/todo';
 import configureStore from './store/configStore';
 
 const store = configureStore();
@@ -13,6 +14,7 @@ const store = configureStore();
 class App extends React.Component {
   componentDidMount() {
     store.dispatch(getUser());
+    // store.dispatch(getTodo());
   }
   render() {
     return (

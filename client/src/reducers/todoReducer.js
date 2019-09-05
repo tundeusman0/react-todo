@@ -6,13 +6,20 @@ import {
   Delete_Todo
 } from '../actions/types';
 
-const inistialState = [];
+const inistialState = {
+  todos: [],
+  isLoading: false
+};
 
 export default (state = inistialState, action) => {
   switch (action.type) {
     case Get_Todo:
+      return { ...state, todos: action.payload };
     case Add_Todo:
-      return [...state, action.payload];
+      return {
+        ...state,
+        todos: [action.payload, ...state.todos]
+      };
     case Edit_Todo:
       return state.map(todo => {
         if (todo.id === action.payload.id) {
@@ -25,7 +32,8 @@ export default (state = inistialState, action) => {
         }
       });
     case Delete_Todo:
-      return state.filter(todo => todo.id !== action.payload.id);
+      console.log(state.todos);
+      return state.todos.filter(todo => todo._id !== action.id);
     case Add_Todo_Fail:
       return [];
     default:
