@@ -32,8 +32,10 @@ export default (state = inistialState, action) => {
         }
       });
     case Delete_Todo:
-      console.log(state.todos);
-      return state.todos.filter(todo => todo._id !== action.id);
+      return {
+        ...state,
+        todos: state.todos.filter(todo => todo._id !== action.id)
+      };
     case Add_Todo_Fail:
       return [];
     default:

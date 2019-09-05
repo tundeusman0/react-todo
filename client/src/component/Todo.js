@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getTodo } from '../actions/todo';
+import { getTodo, deleteTodo } from '../actions/todo';
 
 export class Todo extends React.Component {
   state = {
@@ -11,6 +11,9 @@ export class Todo extends React.Component {
     const { isLoading } = this.props;
     if (isLoading !== this.state.isLoading) {
       this.setState({ isLoading: false });
+      if (this.state.isLoading === isLoading) {
+        this.props.getTodo();
+      }
     }
   }
   componentDidMount() {
@@ -31,6 +34,9 @@ export class Todo extends React.Component {
                     <Link to={`/todo-edit/${id}`}>{description}</Link>
                     <p>completed status: {JSON.stringify(completed)}</p>
                     <p>{createdAt}</p>
+                    <button onClick={() => this.props.deleteTodo(id)}>
+                      Delete
+                    </button>
                   </li>
                 )
               )}
@@ -47,5 +53,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { getTodo }
+  { getTodo, deleteTodo }
 )(Todo);

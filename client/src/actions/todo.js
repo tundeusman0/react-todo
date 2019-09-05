@@ -73,13 +73,10 @@ export const editTodo = payload => async (dispatch, getState) => {
 };
 
 export const deleteTodo = id => async (dispatch, getState) => {
-  //   try {
-  //     const res = await axios.delete(`/api/todo/${id}`, tokenConfig(getState));
-  //     dispatch({ type: Delete_Todo, id });
-  //     console.log(res.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //     console.log(error.message);
-  //     dispatch({ type: Add_Todo_Fail });
-  //   }
+  try {
+    await axios.delete(`/api/todo/${id}`, tokenConfig(getState));
+    dispatch({ type: Delete_Todo, id });
+  } catch (error) {
+    dispatch({ type: Add_Todo_Fail });
+  }
 };
