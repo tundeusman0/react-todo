@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logoutUser } from '../actions/auth';
+import { logoutUser, deleteSelf } from '../actions/auth';
 import Todo from './Todo';
 
 // import PropTypes from 'prop-types'
@@ -10,6 +10,7 @@ class DashBoard extends React.Component {
   render() {
     return (
       <div>
+        <h1>Hello {this.props.userName}</h1>
         <button
           onClick={() => {
             this.props.logoutUser();
@@ -18,6 +19,9 @@ class DashBoard extends React.Component {
         >
           LogOut
         </button>
+        <button onClick={() => this.props.deleteSelf()}>
+          Delete Your Account
+        </button>
         <Link to="/add-todo">Add Todo</Link>
         <Todo />
       </div>
@@ -25,11 +29,11 @@ class DashBoard extends React.Component {
   }
 }
 
-// DashBoard.propTypes = {
-
-// }
+const mapStateToProps = state => ({
+  userName: state.auth.user.user.name
+});
 
 export default connect(
-  null,
-  { logoutUser }
+  mapStateToProps,
+  { logoutUser, deleteSelf }
 )(DashBoard);

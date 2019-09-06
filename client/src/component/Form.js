@@ -35,7 +35,9 @@ class Form extends Component {
         this.props.submitForm(register);
       }
     }
-    this.props.submitForm(login);
+    if (this.props.formName !== 'Register') {
+      this.props.submitForm(login);
+    }
   };
   render() {
     return (

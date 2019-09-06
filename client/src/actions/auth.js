@@ -1,5 +1,6 @@
 import axios from 'axios';
 import tokenConfig from '../selectors/tokenConfig';
+import todoTokenConfig from '../selectors/todoTokenConfig';
 import { returnAuthError, GetUserFail } from './authError';
 import {
   Add_User,
@@ -87,4 +88,15 @@ export const loginUser = (payload = {}) => async dispatch => {
 export const logoutUser = () => dispatch => {
   dispatch({ type: Todo_Logout });
   dispatch({ type: Logout_User });
+};
+
+export const deleteSelf = () => async (dispatch, getState) => {
+  try {
+    await axios.delete('api/user', todoTokenConfig(getState));
+    dispatch({ type: Todo_Logout });
+    dispatch({ type: Logout_User });
+  } catch (error) {
+    dispatch({ type: Todo_Logout });
+    dispatch({ type: Logout_User });
+  }
 };
