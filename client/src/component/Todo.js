@@ -7,13 +7,10 @@ export class Todo extends React.Component {
   state = {
     isLoading: true
   };
-  componentDidUpdate() {
+  componentDidUpdate(prevState) {
     const { isLoading } = this.props;
-    if (isLoading !== this.state.isLoading) {
+    if (isLoading !== prevState.isLoading) {
       this.setState({ isLoading: false });
-      if (this.state.isLoading === isLoading) {
-        this.props.getTodo();
-      }
     }
   }
   componentDidMount() {
@@ -49,7 +46,7 @@ export class Todo extends React.Component {
 
 const mapStateToProps = state => ({
   todos: state.todos,
-  isLoading: state.todos.isLoading
+  isLoading: state.todos.loading
 });
 export default connect(
   mapStateToProps,

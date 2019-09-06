@@ -9,6 +9,7 @@ import {
   User_Log_Fail,
   User_Reg_Fail,
   User_Auth_Success,
+  Todo_Logout,
   User_Loading
 } from './types';
 
@@ -84,5 +85,6 @@ export const loginUser = (payload = {}) => async dispatch => {
 };
 
 export const logoutUser = () => dispatch => {
+  dispatch({ type: Todo_Logout });
   dispatch({ type: Logout_User });
 };

@@ -3,22 +3,25 @@ import {
   Add_Todo,
   Add_Todo_Fail,
   Edit_Todo,
+  Todo_Loading,
+  Todo_Logout,
   Delete_Todo
 } from '../actions/types';
 
 const inistialState = {
   todos: [],
-  isLoading: false
+  loading: false
 };
 
 export default (state = inistialState, action) => {
   switch (action.type) {
     case Get_Todo:
-      return { ...state, todos: action.payload };
+      return { ...state, todos: action.payload, loading: false };
     case Add_Todo:
       return {
         ...state,
-        todos: [action.payload, ...state.todos]
+        todos: [action.payload, ...state.todos],
+        loading: false
       };
     case Edit_Todo:
       return {
@@ -27,7 +30,8 @@ export default (state = inistialState, action) => {
           if (todo.id === action.payload.id) {
             return {
               ...todo,
-              ...action.payload.todo
+              ...action.payload.todo,
+              loading: false
             };
           } else {
             return todo;
@@ -37,11 +41,22 @@ export default (state = inistialState, action) => {
     case Delete_Todo:
       return {
         ...state,
-        todos: state.todos.filter(todo => todo._id !== action.id)
+        todos: state.todos.filter(todo => todo._id !== action.id),
+        loading: false
       };
     case Add_Todo_Fail:
       return {
-        ...state
+        ...state,
+        loading: false
+      };
+    case Todo_Logout:
+      return {
+        todos: []
+      };
+    case Todo_Loading:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return state;
