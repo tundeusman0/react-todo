@@ -5,6 +5,7 @@ import auth from '../reducers/auth';
 import authError from '../reducers/authError';
 import todos from '../reducers/todoReducer';
 import todoError from '../reducers/todoError';
+import admin from '../reducers/adminReducer';
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // create store
@@ -14,7 +15,8 @@ export default () => {
       auth,
       authError,
       todos,
-      todoError
+      todoError,
+      admin
     }),
     composeEnhancer(applyMiddleware(thunk))
   );

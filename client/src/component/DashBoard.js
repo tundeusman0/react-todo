@@ -23,6 +23,7 @@ class DashBoard extends React.Component {
           Delete Your Account
         </button>
         <Link to="/add-todo">Add Todo</Link>
+        {this.props.isAdmin && <Link to="/admin"> Admin Area</Link>}
         <Todo />
       </div>
     );
@@ -30,7 +31,8 @@ class DashBoard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userName: state.auth.user.user.name
+  userName: state.auth.user.user.name,
+  isAdmin: state.auth.user.user.isAdmin
 });
 
 export default connect(
