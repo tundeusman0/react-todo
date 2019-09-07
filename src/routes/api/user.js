@@ -61,7 +61,7 @@ router.patch('/', auth, async (req, res) => {
   }
   try {
     const emailExisted = await User.findOne({ email });
-    if (emailExisted) throw new Error();
+    if (emailExisted.name === name) throw new Error();
     const user = await User.findByIdAndUpdate(
       _id,
       { $set: { name, email } },

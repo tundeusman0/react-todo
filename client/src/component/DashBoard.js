@@ -22,6 +22,7 @@ class DashBoard extends React.Component {
         <button onClick={() => this.props.deleteSelf()}>
           Delete Your Account
         </button>
+        <Link to={`edit-user/${this.props.userId}`}>Edit User</Link>
         <Link to="/add-todo">Add Todo</Link>
         {this.props.isAdmin && <Link to="/admin"> Admin Area</Link>}
         <Todo />
@@ -32,6 +33,7 @@ class DashBoard extends React.Component {
 
 const mapStateToProps = state => ({
   userName: state.auth.user.user.name,
+  userId: state.auth.user.user._id,
   isAdmin: state.auth.user.user.isAdmin
 });
 

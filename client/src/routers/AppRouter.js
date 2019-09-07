@@ -8,6 +8,7 @@ import Register from '../component/Register';
 import Login from '../component/Login';
 import AddTodos from '../component/AddTodos';
 import EditTodos from '../component/EditTodos';
+import EditUser from '../component/EditUser';
 import AdminPage from '../component/AdminPage';
 import NoMatch from '../component/NoMatch';
 import PrivateRoute from './PrivateRoute';
@@ -44,6 +45,11 @@ export class AppRouter extends Component {
                 <PrivateRoute exact path="/dashboard" component={DashBoard} />
                 <PrivateRoute path="/edit-todo/:id" component={EditTodos} />
                 <PrivateRoute exact path="/admin" component={AdminPage} />
+                <PrivateRoute
+                  exact
+                  path="/edit-user/:id"
+                  component={EditUser}
+                />
                 <Route component={NoMatch} />
               </Switch>
             </div>

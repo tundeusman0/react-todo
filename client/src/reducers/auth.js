@@ -40,6 +40,14 @@ export default (state = inistialState, action) => {
         isLoading: false,
         user: action.payload
       };
+    case 'EDIT_USER':
+      return {
+        ...state,
+        user: {
+          ...action.payload.user,
+          token: action.payload.token
+        }
+      };
     case User_Reg_Fail:
     case User_Log_Fail:
     case Logout_User:
