@@ -23,6 +23,12 @@ export default (state = initialState, action) => {
       return {
         adminError: true
       };
+    case 'ADMIN_DELETE_USER':
+      return {
+        ...state,
+        users: state.users.filter(user => user._id !== action.id),
+        isLoading: false
+      };
     default:
       return state;
   }
