@@ -14,12 +14,17 @@ app.use(express.json());
 app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/todo', todoRouter);
-// test default route
-app.get('*', (req, res) => {
-  res.status(200).json({
-    msg: 'it works well'
+
+// server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // set static folder
+  app.use(express.static('client/build'));
+
+  // load unwanted route here
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
-});
+}
 
 // default port
 const port = process.env.PORT;
