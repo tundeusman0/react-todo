@@ -1,5 +1,5 @@
 import axios from 'axios';
-import todoTokenConfig from '../selectors/todoTokenConfig';
+import userTokenConfig from '../selectors/userTokenConfig';
 import {
   Get_Todo,
   Get_Todo_Fail,
@@ -19,7 +19,7 @@ export const returnTodoError = payload => ({
 export const getTodo = () => async (dispatch, getState) => {
   dispatch(setTodoLoading());
   try {
-    const res = await axios.get('/api/todo', todoTokenConfig(getState));
+    const res = await axios.get('/api/todo', userTokenConfig(getState));
     dispatch({ type: Get_Todo, payload: res.data });
     dispatch({ type: Todo_Success });
   } catch (error) {
@@ -41,7 +41,7 @@ export const addTodo = (payload = {}) => async (dispatch, getState) => {
     let { completed } = payload;
     completed = JSON.parse(completed);
     const body = { ...payload, completed };
-    const res = await axios.post('/api/todo', body, todoTokenConfig(getState));
+    const res = await axios.post('/api/todo', body, userTokenConfig(getState));
     dispatch({ type: Add_Todo, payload: res.data.todo });
     dispatch({ type: Todo_Success });
   } catch (error) {
@@ -63,7 +63,7 @@ export const editTodo = payload => async (dispatch, getState) => {
     await axios.patch(
       `/api/todo/${payload.id}`,
       payload.todo,
-      todoTokenConfig(getState)
+      userTokenConfig(getState)
     );
     dispatch({ type: Edit_Todo, payload });
     dispatch({ type: Todo_Success });
@@ -84,7 +84,7 @@ export const editTodo = payload => async (dispatch, getState) => {
 
 export const deleteTodo = id => async (dispatch, getState) => {
   try {
-    await axios.delete(`/api/todo/${id}`, todoTokenConfig(getState));
+    await axios.delete(`/api/todo/${id}`, userTokenConfig(getState));
     dispatch({ type: Delete_Todo, id });
   } catch (error) {
     dispatch({ type: Add_Todo_Fail });

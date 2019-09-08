@@ -21,3 +21,7 @@ export const User_Reg_Fail = 'USER_REGISTERATION_FAIL';
 export const User_Log_Fail = 'USER_LOGIN_FAIL';
 export const Get_User_Fail = 'GET_USER_FAIL';
 export const Upadate_User_Fail = 'UPDATE_USER_FAIL';
+export const Admin_Loaded = 'ADMIN_LOADED';
+export const Admin_Loadng = 'ADMIN_LOADING';
+export const Admin_Delete_User = 'ADMIN_DELETE_USER';
+export const Admin_Error = 'ADMIN_ERROR';

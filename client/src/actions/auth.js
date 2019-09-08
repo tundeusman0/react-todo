@@ -1,6 +1,5 @@
 import axios from 'axios';
 import tokenConfig from '../selectors/tokenConfig';
-import todoTokenConfig from '../selectors/todoTokenConfig';
 import { returnAuthError, GetUserFail } from './authError';
 import {
   Add_User,
@@ -42,7 +41,7 @@ export const getUser = () => async (dispatch, getState) => {
   }
 };
 
-export const addUser = (payload = {}) => async dispatch => {
+export const register = (payload = {}) => async dispatch => {
   try {
     const res = await axios.post('/api/user', payload);
     dispatch({ type: Add_User, payload: res.data });
@@ -65,7 +64,7 @@ export const addUser = (payload = {}) => async dispatch => {
   }
 };
 
-export const loginUser = (payload = {}) => async dispatch => {
+export const login = (payload = {}) => async dispatch => {
   try {
     const res = await axios.post('/api/user/login', payload);
     dispatch({ type: Login_User, payload: res.data });
@@ -85,55 +84,7 @@ export const loginUser = (payload = {}) => async dispatch => {
   }
 };
 
-export const logoutUser = () => dispatch => {
+export const logout = () => dispatch => {
   dispatch({ type: Todo_Logout });
   dispatch({ type: Logout_User });
-};
-
-export const editUser = payload => async (dispatch, getState) => {
-  const token = getState().auth.token;
-  try {
-    const res = await axios.patch(
-      `/api/user/`,
-      payload.updates,
-      todoTokenConfig(getState)
-    );
-    const user = res.data;
-    dispatch({ type: 'EDIT_USER', payload: { user, token } });
-    dispatch({ type: User_Auth_Success });
-  } catch (error) {
-    let msg = '',
-      status = '';
-    if (error.message === 'Request failed with status code 406') {
-      msg = 'Fill all Fields';
-      status = '406';
-    } else if (error.message === 'Request failed with status code 409') {
-      msg = 'User already Exists';
-      status = '409';
-    } else if (error.message === 'Request failed with status code 404') {
-      msg = 'Atleast Change your UserName';
-      status = '404';
-    } else {
-      msg = `Unable to Update, Atleast Change your UserName`;
-      status = '400';
-    }
-    dispatch(
-      returnAuthError({
-        status,
-        msg,
-        id: 'EDIT_FAIL'
-      })
-    );
-  }
-};
-
-export const deleteSelf = () => async (dispatch, getState) => {
-  try {
-    await axios.delete('api/user', todoTokenConfig(getState));
-    dispatch({ type: Todo_Logout });
-    dispatch({ type: Logout_User });
-  } catch (error) {
-    dispatch({ type: Todo_Logout });
-    dispatch({ type: Logout_User });
-  }
 };

@@ -1,25 +1,31 @@
 import axios from 'axios';
-import todoTokenConfig from '../selectors/todoTokenConfig';
+import userTokenConfig from '../selectors/userTokenConfig';
+import {
+  Admin_Loaded,
+  Admin_Loadng,
+  Admin_Delete_User,
+  Admin_Error
+} from './types';
 
 export const adminGet = () => async (dispatch, getState) => {
-  dispatch({ type: 'ADMIN_LOADING' });
+  dispatch({ type: Admin_Loadng });
   try {
-    const res = await axios.get('api/admin', todoTokenConfig(getState));
-    dispatch({ type: 'ADMIN_LOADED', payload: res.data });
+    const res = await axios.get('api/admin', userTokenConfig(getState));
+    dispatch({ type: Admin_Loaded, payload: res.data });
   } catch (error) {
     console.log(error);
-    dispatch({ type: 'ADMIN_ERROR' });
+    dispatch({ type: Admin_Error });
     console.log('you are not an admin');
   }
 };
 
 export const adminDeleteUser = id => async (dispatch, getState) => {
   try {
-    await axios.delete(`api/admin/${id}`, todoTokenConfig(getState));
-    dispatch({ type: 'ADMIN_DELETE_USER', id });
+    await axios.delete(`api/admin/${id}`, userTokenConfig(getState));
+    dispatch({ type: Admin_Delete_User, id });
   } catch (error) {
     console.log(error);
-    dispatch({ type: 'ADMIN_ERROR' });
+    dispatch({ type: Admin_Error });
     console.log('you are not an admin');
   }
 };

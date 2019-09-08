@@ -1,3 +1,10 @@
+import {
+  Admin_Loaded,
+  Admin_Error,
+  Admin_Loadng,
+  Admin_Delete_User
+} from '../actions/types';
+
 const initialState = {
   users: [],
   isLoading: false,
@@ -6,24 +13,24 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'ADMIN_LOADING':
+    case Admin_Loadng:
       return {
         ...state,
         isLoading: true,
         adminError: false
       };
-    case 'ADMIN_LOADED':
+    case Admin_Loaded:
       return {
         ...state,
         users: [...action.payload.users],
         isLoading: false,
         adminError: false
       };
-    case 'ADMIN_ERROR':
+    case Admin_Error:
       return {
         adminError: true
       };
-    case 'ADMIN_DELETE_USER':
+    case Admin_Delete_User:
       return {
         ...state,
         users: state.users.filter(user => user._id !== action.id),

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types'
 
 const HomePage = () => {
   return (
@@ -12,9 +11,5 @@ const HomePage = () => {
     </div>
   );
 };
-
-// HomePage.propTypes = {
-
-// }
 
 export default HomePage;

@@ -1,19 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Form from './Form';
-import { addUser } from '../actions/auth';
+import { register } from '../actions/auth';
 
-const Register = ({ addUser, history }) => (
+const Register = ({ register, history }) => (
   <div>
     <Form
       formName="Register"
       history={history}
-      submitForm={user => addUser(user)}
+      submitForm={user => register(user)}
     />
   </div>
 );
 
 export default connect(
   null,
-  { addUser }
+  { register }
 )(Register);

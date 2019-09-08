@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Form from './Form';
-import { editUser } from '../actions/auth';
+import { editUser } from '../actions/user';
 
 export const EditUser = ({ user, editUser, userId, history }) => (
   <div>

@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Form from './Form';
-import { loginUser } from '../actions/auth';
+import { login } from '../actions/auth';
 
-const Login = ({ loginUser, history }) => {
+const Login = ({ login, history }) => {
   return (
     <div>
       <Form
         formName="Login"
         history={history}
-        submitForm={user => loginUser(user)}
+        submitForm={user => login(user)}
       />
     </div>
   );
@@ -17,5 +17,5 @@ const Login = ({ loginUser, history }) => {
 
 export default connect(
   null,
-  { loginUser }
+  { login }
 )(Login);
