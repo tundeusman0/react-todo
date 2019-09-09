@@ -39,17 +39,13 @@ export class AppRouter extends Component {
             <div>
               <Switch>
                 <PublicRoute exact path="/" component={HomePage} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login} />
-                <PrivateRoute exact path="/add-todo" component={AddTodos} />
-                <PrivateRoute exact path="/dashboard" component={DashBoard} />
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                <PrivateRoute path="/add-todo" component={AddTodos} />
+                <PrivateRoute path="/dashboard" component={DashBoard} />
                 <PrivateRoute path="/edit-todo/:id" component={EditTodos} />
-                <PrivateRoute exact path="/admin" component={AdminPage} />
-                <PrivateRoute
-                  exact
-                  path="/edit-user/:id"
-                  component={EditUser}
-                />
+                <PrivateRoute path="/admin" component={AdminPage} />
+                <PrivateRoute path="/edit-user/:id" component={EditUser} />
                 <Route component={NoMatch} />
               </Switch>
             </div>

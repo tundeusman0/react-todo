@@ -4,7 +4,7 @@ require('./db/mongoose');
 const userRouter = require('./routes/api/user');
 const adminRouter = require('./routes/api/admin');
 const todoRouter = require('./routes/api/todo');
-const path = require("path");
+const path = require('path');
 
 const app = express();
 // enable cors
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
   // load unwanted route here
-  app.get('*', (req, res) => {
+  app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
 }
