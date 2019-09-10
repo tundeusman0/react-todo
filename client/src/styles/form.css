@@ -131,7 +131,7 @@
 .form_wrapper input[type="submit"] {
   background: #f5ba1a;
   background: #11998e;
-  height: 35px;
+  /* height: 35px; */
   line-height: 35px;
   width: 100%;
   border: none;

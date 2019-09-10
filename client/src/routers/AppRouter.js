@@ -48,7 +48,7 @@ export class AppRouter extends Component {
                   <PrivateRoute path="/edit-todo/:id" component={EditTodos} />
                   <PrivateRoute path="/admin" component={AdminPage} />
                   <PrivateRoute path="/edit-user/:id" component={EditUser} />
-                  <Route component={NoMatch} />
+                  <PublicRoute component={NoMatch} />
                 </div>
               )}
             </Switch>
