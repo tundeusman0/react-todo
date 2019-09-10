@@ -14,6 +14,7 @@ import NoMatch from '../component/NoMatch';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import LoadingPage from '../component/LoadingPage';
+import Footer from '../component/Footer';
 
 const history = createBrowserHistory();
 
@@ -36,11 +37,11 @@ export class AppRouter extends Component {
           <LoadingPage />
         ) : (
           <Router history={history}>
-            <div>
+            <div className="page-body">
               <Switch>
                 <PublicRoute exact path="/" component={HomePage} />
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
+                <PublicRoute path="/register" component={Register} />
+                <PublicRoute path="/login" component={Login} />
                 <PrivateRoute path="/add-todo" component={AddTodos} />
                 <PrivateRoute path="/dashboard" component={DashBoard} />
                 <PrivateRoute path="/edit-todo/:id" component={EditTodos} />
@@ -51,6 +52,7 @@ export class AppRouter extends Component {
             </div>
           </Router>
         )}
+        <Footer />
       </div>
     );
   }

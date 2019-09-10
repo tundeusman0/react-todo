@@ -45,3 +45,25 @@ a:hover {
 a:active {
   text-decoration: underline;
 }
+html,
+body {
+  position: relative;
+}
+.page-body {
+  min-height: 69vh;
+  overflow: hidden;
+  display: block;
+  position: relative;
+}
+// footer
+footer {
+  text-align: center;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+footer a {
+  display: flex;
+  justify-content: center;
+}
