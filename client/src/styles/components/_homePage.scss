@@ -19,7 +19,7 @@
 // @media phone sizes
 @media only screen and (max-width: 767px) {
   .homePage {
-    display: inline-block;
+    flex-direction: column;
   }
   h2 {
     margin: $no-size;

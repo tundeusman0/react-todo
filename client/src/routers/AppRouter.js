@@ -33,25 +33,27 @@ export class AppRouter extends Component {
   render() {
     return (
       <div>
-        {this.state.isLoading ? (
-          <LoadingPage />
-        ) : (
-          <Router history={history}>
-            <div className="page-body">
-              <Switch>
-                <PublicRoute exact path="/" component={HomePage} />
-                <PublicRoute path="/register" component={Register} />
-                <PublicRoute path="/login" component={Login} />
-                <PrivateRoute path="/add-todo" component={AddTodos} />
-                <PrivateRoute path="/dashboard" component={DashBoard} />
-                <PrivateRoute path="/edit-todo/:id" component={EditTodos} />
-                <PrivateRoute path="/admin" component={AdminPage} />
-                <PrivateRoute path="/edit-user/:id" component={EditUser} />
-                <Route component={NoMatch} />
-              </Switch>
-            </div>
-          </Router>
-        )}
+        <Router history={history}>
+          <div className="page-body">
+            <Switch>
+              <PublicRoute exact path="/" component={HomePage} />
+              <PublicRoute path="/register" component={Register} />
+              <PublicRoute path="/login" component={Login} />
+              {this.state.isLoading ? (
+                <LoadingPage />
+              ) : (
+                <div>
+                  <PrivateRoute path="/add-todo" component={AddTodos} />
+                  <PrivateRoute path="/dashboard" component={DashBoard} />
+                  <PrivateRoute path="/edit-todo/:id" component={EditTodos} />
+                  <PrivateRoute path="/admin" component={AdminPage} />
+                  <PrivateRoute path="/edit-user/:id" component={EditUser} />
+                  <Route component={NoMatch} />
+                </div>
+              )}
+            </Switch>
+          </div>
+        </Router>
         <Footer />
       </div>
     );
